@@ -14,7 +14,7 @@
             @foreach ($posts->$post )
             <div class="post">
                 <h3><a href="#">{{{ $post->title }}}</a></h3>
-                <div class="infor">Posted:{{{ $post->timestamp }}}</div>
+                <div class="infor">Posted:{{{ $post->timeStamp }}}</div>
                 <p>{{{ $post->content }}}</p>
             </div>
             @endforreach
