@@ -19,14 +19,25 @@ class StudentController extends BaseController {
     private $courses;
     private $action;
 
-    public function init(){
+    public function init($id,$action){
+        switch ($action){
+            case 'ClassInfo':
+                getStudentClassInfo();
+                break;
+            case 'CourseStatus':
+                getStudentCourseStatus();
+                break;
+            default:
+                echo $action.'Not Found';
+        }
+    }
+
+    private function getStudentClassInfo(){
 
     }
 
-    function getStudentClassInfo(){
-
+    private function getStudentCourseStatus(){
 
     }
-
 
 }

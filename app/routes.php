@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/student/{id?}/{action?}','StudentController@init');
+Route::get('/student/{id}/{action?}','StudentController@init');
 
 Route::get('/', function()
 {
