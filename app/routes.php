@@ -11,7 +11,10 @@
 |
 */
 
+
+Route::get('/student/{id?}/{action?}','StudentController@init');
+
 Route::get('/', function()
 {
-	return View::make('hello');
+
 });
