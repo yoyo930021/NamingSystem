@@ -11,11 +11,16 @@
 |
 */
 
-
-Route::get('/student/{id}/{action?}','StudentController@init');
-
 Route::get('/', function()
 {
     $post=Post::all();
-    return View::make('index')->with('posts',$post);
+    $setting=Setting::find(0);
+    return View::make('index')->with('posts',$post)->with('settings',$setting);
 });
+Route::post('/', 'StudentController@login');
+
+Route::get('/login', function()
+{
+    return View::make('login');
+});
+Route::post('/login', 'AdminController@login');
