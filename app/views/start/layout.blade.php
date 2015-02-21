@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <div class="container" id="contain">
+<div id="body" class="container">
+    <div id="contain">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -24,11 +25,12 @@
         @yield('contain')
 
     </div>
-    <div class="container" id="footer">
+    <div id="footer">
         <div class="col-md-12" id="license">
             <p style="text-align:right">Auto-Distribute System All rights reserved Daan Computer Research Club</p>
         </div>
     </div>
+</div>
 </body>
 
 </html>

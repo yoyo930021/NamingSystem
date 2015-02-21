@@ -16,5 +16,6 @@ Route::get('/student/{id}/{action?}','StudentController@init');
 
 Route::get('/', function()
 {
-
+    $post=Post::all();
+    return View::make('index')->with('posts',$post);
 });
