@@ -8,6 +8,8 @@
 class ClassController extends BaseController {
     public function info($id){
         $class=Classes::find($id);
-        return $class->name;
+        $students=Student::where('class_id', '=', $id);
+        $teacher=Teacher::find($class->teacher_id);
+        return '{"Teacher":'.$teacher->toJson().',"Students":'.$students->select(array('id', 'name'))->get()->toJson().'}';
     }
 }

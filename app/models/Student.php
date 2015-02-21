@@ -7,7 +7,7 @@
  */
 class Student extends Eloquent {
 
-    protected $table = 'student';
-    protected $timestamps = false;
-
+    public $table = 'student';
+    public $timestamps = false;
+    public $hidden = array('password','account');
 }

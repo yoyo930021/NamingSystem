@@ -5,9 +5,9 @@
  * Date: 15/2/21
  * Time: 下午1:48
  */
-class Classes extends Eloquent {
+class Teacher extends Eloquent {
 
-    public $table = 'class';
+    public $table = 'teacher';
     public $timestamps = false;
-
+    public $hidden = array('password','account');
 }
