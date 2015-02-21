@@ -11,13 +11,13 @@
             </center>
         </div>
         <div class="col-md-9">
-            @foreach ($posts->$post )
+            @foreach ($posts as $post)
             <div class="post">
                 <h3><a href="#">{{{ $post->title }}}</a></h3>
                 <div class="infor">Posted:{{{ $post->timeStamp }}} 作者：{{{ $post->author }}}</div>
                 <p>{{{ $post->content }}}</p>
             </div>
-            @endforreach
+            @endforeach
         </div>
 
         <div class="col-md-3">
