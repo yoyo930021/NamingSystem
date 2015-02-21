@@ -6,39 +6,43 @@
  * Time: 下午6:07
  */
 class StudentController extends BaseController {
-    public $id;
-    private $student_Name;
-    public $student_Class;
-    private $courses;
-    private $action;
-
-    private function getStudentClassInfo($id){
-        $result=DB::select('select * from student where id = ?', array($id));
-        return $result;
-    }
-
-    private function getStudentCourseStatus(){
-        echo 'getStudentCourseStatus';
-    }
-
-    public function init($id,$action){
-        switch ($action){
-            case 'ClassInfo':
-                $this->getStudentClassInfo($id);
-                break;
-            case 'CourseStatus':
-                $this->getStudentCourseStatus();
-                break;
-            default:
-                return $action.' Not Found.';
+    public function login()
+    {
+        $settings=Setting::find(0);
+        if($settings->server_state==1)
+        {
+            $account=Input::get('inputAccount');
+            $password=Input::get('inputPassword');
+            $password = sha1(sha1($password) . "place");
+            $student=Student::where('account','=',$account)->count();
+            if($student>0)
+            {
+                $student=Student::where('account','=',$account)->firstOrFail();
+                if ($student->password==$password)
+                {
+                    Session::regenerate();
+                    Session::put('studentlogin',true);
+                    Session::put('id',$student->id);
+                    Session::put('account',$student->account);
+                    Session::put('name', $student->name);
+                    Session::put('class_id',$student->class_id);
+                    Session::put('seat',$student->seat);
+                    return "ya!";
+                }
+                else
+                {
+                    return Redirect::to('/')->with('error', '#');
+                }
+            }
+            else
+            {
+                return Redirect::to('/')->with('error', '#');
+            }
+        }
+        else
+        {
+            return Redirect::to('/');
         }
     }
-}
-
-class course {
-    public $id;
-    public $subject_id;
-    public $startTime;
-    public $endTime;
 }
 

@@ -40,7 +40,7 @@
                 <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
             </form>
             <li>
-                <a href="login">
+                <a href="admin">
                     <p>管理登入</p>
                 </a>
             </li>

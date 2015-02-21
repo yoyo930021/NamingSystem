@@ -3,7 +3,7 @@
 @section('contain')
 
         <div class="col-md-4 col-md-offset-4">
-            <form class="form-signin">
+            <form class="form-signin"  method="POST">
                 <center><h2 class="form-signin-heading">管理登入</h2></center>
                 <label class="sr-only" for="inputAccount">帳號</label>
                 <input name="inputAccount" class="form-control" type="text" autofocus="" required="" placeholder="帳號"></input>

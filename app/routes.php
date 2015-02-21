@@ -15,12 +15,32 @@ Route::get('/', function()
 {
     $post=Post::all();
     $setting=Setting::find(0);
-    return View::make('index')->with('posts',$post)->with('settings',$setting);
+    return View::make('start.index')->with('posts',$post)->with('settings',$setting);
 });
 Route::post('/', 'StudentController@login');
 
-Route::get('/login', function()
+Route::get('/hash/{auth}', function($auth)
 {
-    return View::make('login');
+    $auth = sha1(sha1($auth) . "place");
+    return $auth;
 });
-Route::post('/login', 'AdminController@login');
+Route::get('/admin/hash/{auth}', function($auth)
+{
+    $auth = Hash::make($auth);
+    return $auth;
+});
+
+Route::get('/admin', function()
+{
+    if (Auth::check())
+    {
+        return "ya!";
+    }
+    else
+    {
+        return View::make('start.login');
+    }
+});
+
+
+Route::post('/admin', 'AdminController@login');
