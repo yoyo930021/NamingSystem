@@ -7,6 +7,7 @@
  */
 class ClassController extends BaseController {
     public function info($id){
-        return "getClass $id Info";
+        $class=Classes::find($id);
+        return $class->name;
     }
 }

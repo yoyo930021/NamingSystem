@@ -11,8 +11,8 @@
 |
 */
 
-
-Route::get('/student/{id}/{action?}','StudentController@init');
+//Class Routes
+Route::get('Class/{id}/Info','ClassController@info');
 
 Route::get('/', function()
 {
