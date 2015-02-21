@@ -37,7 +37,6 @@
                 <label for="inputPassword" class="sr-only">密碼</label>
                 <input name="inputPassword" class="form-control" placeholder="請輸入身份證後四碼" required="" type="password"></input>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
-                <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
             </form>
             <li>
                 <a href="admin">
