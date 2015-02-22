@@ -6,6 +6,11 @@
  * Time: 下午6:07
  */
 class TeacherController extends BaseController {
+
+
+
+
+
     public function login()
     {
         $account=Input::get('inputAccount');
@@ -24,24 +29,29 @@ class TeacherController extends BaseController {
                 Session::put('account',$teacher->account);
                 Session::put('name', $teacher->name);
                 Session::put('class_id',$teacher->class_id);
+                yslog($account,"teacher","login","success");
                 return View::make('teacher.index');
             }
             else
             {
+                yslog($account,"teacher","login","failed");
                 return Redirect::to('/teacher')->with('error', '#');
             }
         }
         else
         {
+            yslog($account,"teacher","login","failed");
             return Redirect::to('/teacher')->with('error', '#');
         }
     }
 
     public function logout()
     {
+        yslog(Session::get('account'),"teacher","logout","success");
         Session::regenerate();
         Session::flush();
         return Redirect::to('/teacher')->with('logout', '#');
     }
+
 }
 

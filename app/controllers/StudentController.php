@@ -6,6 +6,9 @@
  * Time: 下午6:07
  */
 class StudentController extends BaseController {
+
+
+
     public function login()
     {
         $settings=Setting::find(0);
@@ -28,15 +31,18 @@ class StudentController extends BaseController {
                     Session::put('name', $student->name);
                     Session::put('class_id',$student->class_id);
                     Session::put('seat',$student->seat);
+                    yslog($account,"student","login","success");
                     return Redirect::to('/student');
                 }
                 else
                 {
+                    yslog($account,"student","login","failed");
                     return Redirect::to('/')->with('error', '#');
                 }
             }
             else
             {
+                yslog($account,"student","login","failed");
                 return Redirect::to('/')->with('error', '#');
             }
         }
@@ -48,9 +54,14 @@ class StudentController extends BaseController {
 
     public function logout()
     {
+        yslog(Session::get('account'),"student","logout","success");
         Session::regenerate();
         Session::flush();
         return Redirect::to('/')->with('logout', '#');
     }
+
+
+
+
 }
 

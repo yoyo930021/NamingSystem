@@ -11,10 +11,29 @@
 |
 */
 
+function yslog($account,$ldentity,$doing,$commit)
+{
+    $log=new Syslog;
+    $log->account=$account;
+    $log->ldentity=$ldentity;
+    $log->doing=$doing;
+    $log->commit=$commit;
+    @$log->HTTP_CLIENT_IP=$_SERVER['HTTP_CLIENT_IP'];
+    @$log->HTTP_X_FORWARDED_FOR=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    @$log->HTTP_X_FORWARDED=$_SERVER['HTTP_X_FORWARDED'];
+    @$log->HTTP_X_CLUSTER_CLIENT_IP=$_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+    @$log->HTTP_FORWARDED_FOR=$_SERVER['HTTP_FORWARDED_FOR'];
+    @$log->HTTP_FORWARDED=$_SERVER['HTTP_FORWARDED'];
+    @$log->REMOTE_ADDR=$_SERVER['REMOTE_ADDR'];
+    @$log->HTTP_VIA=$_SERVER['HTTP_VIA'];
+    $log->save();
+}
+
 Route::get('/', function()
 {
         $post=Post::all();
         $setting=Setting::find(0);
+        yslog("guest","guest","goin","");
         return View::make('start.index')->with('posts',$post)->with('settings',$setting);
 });
 Route::post('/', 'StudentController@login');

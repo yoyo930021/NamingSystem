@@ -19,10 +19,28 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="">雲端出缺席管理系統</a>
                 </div>
-                <div class="navbar-right">
-                    <a href="admin/logout" class="btn btn-default navbar-btn">登出</a>
-                    <br>
+                @if(auth::check())
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">人員管理</a>
+                        </li>
+                        <li><a href="#">課程管理</a>
+                        </li>
+                        <li><a href="#">簽到資料變更</a>
+                        </li>
+                        <li>
+                            <a href="#">各樣申請</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>{{{Auth::user()->name}}}</a>
+                        </li>
+                        <li><a href="admin/logout">登出</a>
+                        </li>
+                    </ul>
                 </div>
+                @endif
+
             </div>
 
         </nav>
