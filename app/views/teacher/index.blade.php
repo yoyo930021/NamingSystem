@@ -1,4 +1,4 @@
-@extends('student.layout')
+@extends('teacher.layout')
 
 @section('contain')
 

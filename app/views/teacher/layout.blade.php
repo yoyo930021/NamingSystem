@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>雲端出缺席學生系統</title>
+    <title>雲端出缺席老師系統</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -17,9 +17,14 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">雲端出缺席學生系統</a>
+                    <a class="navbar-brand" href="">雲端出缺席老師系統</a>
+                </div>
+                <div class="navbar-right">
+                    <a href="teacher/logout" class="btn btn-default navbar-btn">登出</a>
+                    <br>
                 </div>
             </div>
+
         </nav>
 
         @yield('contain')

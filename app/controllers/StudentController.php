@@ -20,6 +20,7 @@ class StudentController extends BaseController {
                 $student=Student::where('account','=',$account)->firstOrFail();
                 if ($student->password==$password)
                 {
+                    Session::flush();
                     Session::regenerate();
                     Session::put('studentlogin',true);
                     Session::put('id',$student->id);
@@ -27,7 +28,7 @@ class StudentController extends BaseController {
                     Session::put('name', $student->name);
                     Session::put('class_id',$student->class_id);
                     Session::put('seat',$student->seat);
-                    return "ya!";
+                    return Redirect::to('/student');
                 }
                 else
                 {
@@ -43,6 +44,13 @@ class StudentController extends BaseController {
         {
             return Redirect::to('/');
         }
+    }
+
+    public function logout()
+    {
+        Session::regenerate();
+        Session::flush();
+        return Redirect::to('/')->with('logout', '#');
     }
 }
 

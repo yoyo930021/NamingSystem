@@ -17,7 +17,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">雲端出缺席系統</a>
+                    <a class="navbar-brand" href="">雲端出缺席系統</a>
                 </div>
             </div>
         </nav>

@@ -16,8 +16,14 @@ class AdminController extends BaseController {
         }
         else
         {
-            return View::make('start.login');
+            return View::make('admin.login');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Redirect::to('/admin')->with('logout', '#');
     }
 }
 
