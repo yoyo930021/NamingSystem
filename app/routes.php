@@ -78,7 +78,17 @@ Route::get('/admin', function()
     }
 });
 Route::post('/admin', 'AdminController@login');
-Route::get('/admin/logout', 'AdminController@logout');
+Route::get('/admin.post', 'AdminController@postall');
+Route::get('/admin.post.add','AdminController@postadd');
+Route::get('/admin.post.{action}.{id}','AdminController@postaction');
+Route::post('/admin.post.{action}','AdminController@postwrite');
+Route::post('/admin.post.{action}.{id}','AdminController@postwrite');
+Route::get('/admin.class', 'AdminController@classall');
+Route::post('/admin.class.add','AdminController@classadd');
+Route::get('/admin.class.{action}.{id}','AdminController@classaction');
+Route::post('/admin.class.{action}','AdminController@classwrite');
+Route::post('/admin.class.{action}.{id}','AdminController@classwrite');
+Route::get('/admin.logout', 'AdminController@logout');
 
 
 

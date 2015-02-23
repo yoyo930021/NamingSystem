@@ -15,7 +15,7 @@
             <div class="post">
                 <h3><a href="#">{{{ $post->title }}}</a></h3>
                 <div class="infor">Posted:{{{ $post->timeStamp }}} 作者：{{{ $post->author }}}</div>
-                <p>{{{ $post->content }}}</p>
+                <p>{{ $post->content }}</p>
             </div>
             @endforeach
         </div>

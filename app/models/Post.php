@@ -11,4 +11,6 @@ class Post extends Eloquent{
     protected $table='post';
     //關閉自動維護時間欄位
     public $timestamps = false;
+    protected $fillable = array('id','title','author','content');
+
 }

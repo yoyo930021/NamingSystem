@@ -1,5 +1,5 @@
 <?php
-//Student模型 學生資料
+//Teacher模型 老師資料
 class Teacher extends Eloquent{
   //指定資料表
 	protected $table='teacher';
