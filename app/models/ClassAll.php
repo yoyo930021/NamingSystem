@@ -11,7 +11,7 @@ class ClassAll extends Eloquent{
     protected $table='class';
     //關閉自動維護時間欄位
     public $timestamps = false;
-    protected $fillable = array('name','teacher_id','enabled');
+    protected $fillable = array('name','teacher_id');
     public function teacher()
     {
         return $this->hasOne('Teacher','class_id');

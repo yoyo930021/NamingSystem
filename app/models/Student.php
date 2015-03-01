@@ -5,4 +5,5 @@ class Student extends Eloquent{
 	protected $table='student';
   //關閉自動維護時間的欄位
 	public $timestamps = false;
+    protected $fillable = array('name','class_id','seat','account','password');
 }

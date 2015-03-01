@@ -24,8 +24,15 @@
                     <ul class="nav navbar-nav">
                         <li><a href="admin.post">公告管理</a></li>
                         <li><a href="admin.class">班級管理</a></li>
-                        <li><a href="#">課程管理</a></li>
-                        <li><a href="#">人員管理</a></li>
+                        <li><a href="admin.subject">課程管理</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">人員管理<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="admin.student">學生管理</a></li>
+                                <li><a href="admin.teacher">老師管理</a></li>
+                                <li><a href="admin.admin">管理員管理</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">簽到資料變更</a></li>
                         <li><a href="#">各樣申請</a></li>
                         <li><a href="#">系統設定</a></li>

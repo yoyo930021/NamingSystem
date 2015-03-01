@@ -243,6 +243,193 @@ class AdminController extends BaseController {
         }
     }
 
+    public function subjectall()
+    {
+        $subject=Subject::all();
+        $teacher=Teacher::all();
+        $classall=ClassAll::all();
+        return View::make('admin.subjectall')->with('subjects',$subject)->with('teachers',$teacher)->with('classall',$classall);
+    }
+    public function subjectadd()
+    {
+        $subjects=new Subject;
+        $subjects->name=Input::get('subjectname');
+        $subjects->class_id=Input::get('class');
+        $subjects->teacher_id=Input::get('teacher');
+        $subjects->enabled=1;
+        $subjects->save();
+        return Redirect::to('/admin.subject')->with('status','add');
+    }
+    public function subjectaction($action,$id)
+    {
+        switch ($action)
+        {
+            case 'modify':
+                $teacher=Teacher::all();
+                $subject=Subject::find($id);
+                $classall=ClassAll::all();
+                return View::make('admin.subjectmodify')->with('teachers',$teacher)->with('classall',$classall)->with('subject',$subject)->with('id',$id);
+                break;
+            case 'del':
+                $cources=Cource::all();
+                foreach($cources as $cource)
+                {
+                    if($cource->subject_id==$id)
+                    {
+                        $cource->delect();
+                    }
+                }
+                Subject::destroy($id);
+                return Redirect::to('/admin.subject')->with('status','delect');
+                break;
+        }
+    }
+    public function subjectwrite($action,$id = null)
+    {
+        switch ($action)
+        {
+            case 'modify':
+                $subject=Subject::find(Input::get('id'));
+                $subject->name=Input::get('subjectname');
+                $subject->teacher_id=Input::get('teacher');
+                $subject->class_id=Input::get('classchoose');
+                $subject->enabled=Input::get('enable');
+                $subject->save();
+                return Redirect::to('/admin.subject')->with('status','modify');
+                break;
+            case 'delall':
+                $choose=Input::get('subjects');
+                if(isset($choose))
+                {
+                    for($i=0;$i<count($choose);$i++)
+                    {
+                        $cources=Cource::all();
+                        foreach($cources as $cource)
+                        {
+                            if($cource->subject_id==$choose[$i])
+                            {
+                                $cource->delect();
+                            }
+                        }
+                        Subject::destroy($choose[$i]);
+                    }
+                }
+                return Redirect::to('/admin.subject')->with('status','delect');
+                break;
+        }
+    }
+
+    public function studentall()
+    {
+        $student=Student::all();
+        return View::make('admin.studentall')->with('students',$student);
+    }
+    public function studentaction($action,$id)
+    {
+        switch ($action)
+        {
+            case 'modify':
+                $classall=ClassAll::all();
+                $student=Student::find($id);
+                return View::make('admin.studentadd')->with('classall',$classall)->with('student',$student)->with('id',$id);
+                break;
+            case 'del':
+                Student::destroy($id);
+                return Redirect::to('/admin.student')->with('status','delect');
+                break;
+        }
+    }
+    public function studentadd()
+    {
+        $classall=ClassAll::all();
+        return View::make('admin.studentadd')->with('classall',$classall);
+    }
+    public function studentwrite($action,$id = null)
+    {
+        switch ($action)
+        {
+            case 'add':
+                $student=new Student;
+                $student->name=Input::get('name');
+                $student->seat=Input::get('number');
+                $student->account=Input::get('account');
+                $student->password=sha1(sha1(Input::get('password')) . "place");
+                $student->class_id=Input::get('classname');
+                $student->save();
+                return Redirect::to('/admin.student')->with('status','add');
+                break;
+            case 'modify':
+                $student=Student::find(Input::get('id'));
+                $student->name=Input::get('name');
+                $student->seat=Input::get('number');
+                $student->account=Input::get('account');
+                if(Input::get('password')!="oooooooo") {
+                    $student->password = sha1(sha1(Input::get('password')) . "place");
+                }
+                $student->class_id=Input::get('classname');
+                $student->save();
+                return Redirect::to('/admin.student')->with('status','modify');
+                break;
+            case 'delall':
+                $choose=Input::get('students');
+                if(isset($choose))
+                {
+                    for($i=0;$i<count($choose);$i++)
+                    {
+                        Student::destroy($choose[$i]);
+                    }
+                }
+                return Redirect::to('/admin.student')->with('status','delect');
+                break;
+        }
+    }
+
+    public function teacherall()
+    {
+        $teacher=Teacher::all();
+        $classall=ClassAll::all();
+        return View::make('admin.teacherall')->with('teachers',$teacher)->with('classall',$classall);
+    }
+    public function studentwrite($action,$id = null)
+    {
+        switch ($action)
+        {
+            case 'add':
+                $teacher=new Teacher;
+                $teacher->name=Input::get('name');
+                $teacher->seat=Input::get('number');
+                $teacher->account=Input::get('account');
+                $teacher->password=sha1(sha1(Input::get('password')) . "place");
+                $teacher->class_id=Input::get('classname');
+                $teacher->save();
+                return Redirect::to('/admin.student')->with('status','add');
+                break;
+            case 'modify':
+                $student=Student::find(Input::get('id'));
+                $student->name=Input::get('name');
+                $student->seat=Input::get('number');
+                $student->account=Input::get('account');
+                if(Input::get('password')!="oooooooo") {
+                    $student->password = sha1(sha1(Input::get('password')) . "place");
+                }
+                $student->class_id=Input::get('classname');
+                $student->save();
+                return Redirect::to('/admin.student')->with('status','modify');
+                break;
+            case 'delall':
+                $choose=Input::get('students');
+                if(isset($choose))
+                {
+                    for($i=0;$i<count($choose);$i++)
+                    {
+                        Student::destroy($choose[$i]);
+                    }
+                }
+                return Redirect::to('/admin.student')->with('status','delect');
+                break;
+        }
+    }
+
 
     public function logout()
     {

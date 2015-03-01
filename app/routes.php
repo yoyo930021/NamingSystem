@@ -66,32 +66,49 @@ Route::get('/student', function()
 Route::post('/student', 'StudentController@login');
 Route::get('/student/logout', 'StudentController@logout');
 
-Route::get('/admin', function()
-{
+Route::get('/admin', function () {
     if (Auth::check())
     {
         return View::make('admin.index');
-    }
-    else
+    } else
     {
         return View::make('admin.login');
     }
 });
 Route::post('/admin', 'AdminController@login');
-Route::get('/admin.post', 'AdminController@postall');
-Route::get('/admin.post.add','AdminController@postadd');
-Route::get('/admin.post.{action}.{id}','AdminController@postaction');
-Route::post('/admin.post.{action}','AdminController@postwrite');
-Route::post('/admin.post.{action}.{id}','AdminController@postwrite');
-Route::get('/admin.class', 'AdminController@classall');
-Route::post('/admin.class.add','AdminController@classadd');
-Route::get('/admin.class.{action}.{id}','AdminController@classaction');
-Route::post('/admin.class.{action}','AdminController@classwrite');
-Route::post('/admin.class.{action}.{id}','AdminController@classwrite');
-Route::get('/admin.logout', 'AdminController@logout');
+Route::group(array('before' => 'auth'), function() {
+    Route::get('/admin.post', 'AdminController@postall');
+    Route::get('/admin.post.add', 'AdminController@postadd');
+    Route::get('/admin.post.{action}.{id}', 'AdminController@postaction');
+    Route::post('/admin.post.{action}', 'AdminController@postwrite');
+    Route::post('/admin.post.{action}.{id}', 'AdminController@postwrite');
+    Route::get('/admin.class', 'AdminController@classall');
+    Route::post('/admin.class.add', 'AdminController@classadd');
+    Route::get('/admin.class.{action}.{id}', 'AdminController@classaction');
+    Route::post('/admin.class.{action}', 'AdminController@classwrite');
+    Route::post('/admin.class.{action}.{id}', 'AdminController@classwrite');
+    Route::get('/admin.subject', 'AdminController@subjectall');
+    Route::post('/admin.subject.add', 'AdminController@subjectadd');
+    Route::get('/admin.subject.{action}.{id}', 'AdminController@subjectaction');
+    Route::post('/admin.subject.{action}.{id}', 'AdminController@subjectwrite');
+    Route::post('/admin.subject.{action}', 'AdminController@subjectwrite');
+    Route::get('/admin.student', 'AdminController@studentall');
+    Route::get('/admin.student.{action}.{id}', 'AdminController@studentaction');
+    Route::get('/admin.student.add', 'AdminController@studentadd');
+    Route::post('/admin.student.{action}.{id}', 'AdminController@studentwrite');
+    Route::post('/admin.student.{action}', 'AdminController@studentwrite');
+    Route::get('/admin.teacher','AdminController@teacherall');
+    Route::post('/admin.teacher.{action}', 'AdminController@teacherwrite');
+    Route::get('/admin.admin','AdminController@adminall');
+
+    Route::get('/admin.logout', 'AdminController@logout');
+});
 
 
-
+Route::get('/login',function()
+{
+    return Redirect::to('/');
+});
 Route::get('/hash/{auth}', function($auth)
 {
     $auth = sha1(sha1($auth) . "place");
