@@ -33,10 +33,10 @@
                                 <li><a href="admin.admin">管理員管理</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">簽到資料變更</a></li>
-                        <li><a href="#">各樣申請</a></li>
-                        <li><a href="#">系統設定</a></li>
-                        <li><a href="#">系統日誌</a></li>
+                        <li><a href="admin.rollcall">簽到資料變更</a></li>
+                        <li><a href="admin.apply">各樣申請</a></li>
+                        <li><a href="admin.setting">系統設定</a></li>
+                        <li><a href="admin.log">系統日誌</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a>{{{Auth::user()->name}}}</a>

@@ -1,0 +1,67 @@
+<?php $__env->startSection('contain'); ?>
+
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>課表：</h1>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>時間</th>
+                        <th>星期一</th>
+                        <th>星期二</th>
+                        <th>星期三</th>
+                        <th>星期四</th>
+                        <th>星期五</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>第1節</td>
+                        <?php foreach($week1 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第2節</td>
+                        <?php foreach($week2 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第3節</td>
+                        <?php foreach($week3 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第4節</td>
+                        <?php foreach($week4 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第5節</td>
+                        <?php foreach($week5 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第6節</td>
+                        <?php foreach($week6 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td>第7節</td>
+                        <?php foreach($week7 as $week): ?>
+                            <td><?php echo e($week->subject['name']); ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('student.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

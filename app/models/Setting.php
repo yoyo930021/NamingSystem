@@ -5,5 +5,6 @@ class Setting extends Eloquent{
 	protected $table='setting';
   //關閉自動維護時間欄位
 	public $timestamps = false;
+    protected $fillable = array('server_state','admin_id');
 }
 

@@ -1,0 +1,55 @@
+<?php $__env->startSection('contain'); ?>
+
+    <div class="col-md-12">
+    <div class="jumbotron">
+                <?php if(Session::get('status')=="clear"): ?>
+                    <div class="alert alert-success" role="alert">===清除日誌成功===</div>
+                <?php endif; ?>
+                    <center><a href="admin.log.clear">>>>清除系統日誌<<<</a></center>
+                    <div class="table-responsive">
+            <table class="table table-hover table-condensed table-bordered" id="sampleTable">
+                <thead>
+                    <tr>
+                        <th class="type-int awesome">序號</th>
+                        <th class="type-string">操作帳號</th>
+                        <th class="type-string">身份別</th>
+                        <th class="type-string">做事</th>
+                        <th class="type-string">註解</th>
+                        <th class="type-string">HTTP_CLIENT_IP</th>
+                        <th class="type-string">HTTP_X_FORWARDED_FOR</th>
+                        <th class="type-string">HTTP_X_FORWARDED</th>
+                        <th class="type-string">HTTP_X_CLUSTER_CLIENT_IP</th>
+                        <th class="type-string">HTTP_FORWARDED_FOR</th>
+                        <th class="type-string">HTTP_FORWARDED</th>
+                        <th class="type-string">REMOTE_ADDR</th>
+                        <th class="type-string">HTTP_VIA</th>
+                        <th class="type-string">時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($logs as $log): ?>
+                    <tr>
+                        <td><?php echo e($log->id); ?></td>
+                        <td><?php echo e($log->account); ?></td>
+                        <td><?php echo e($log->ldentity); ?></td>
+                        <td><?php echo e($log->doing); ?></td>
+                        <td><?php echo e($log->commit); ?></td>
+                        <td><?php echo e($log->HTTP_CLIENT_IP); ?></td>
+                        <td><?php echo e($log->HTTP_X_FORWARDED_FOR); ?></td>
+                        <td><?php echo e($log->HTTP_X_FORWARDED); ?></td>
+                        <td><?php echo e($log->HTTP_X_CLUSTER_CLIENT_IP); ?></td>
+                        <td><?php echo e($log->HTTP_FORWARDED_FOR); ?></td>
+                        <td><?php echo e($log->HTTP_FORWARDED); ?></td>
+                        <td><?php echo e($log->REMOTE_ADDR); ?></td>
+                        <td><?php echo e($log->HTTP_VIA); ?></td>
+                        <td><?php echo e($log->timestamp); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+                    </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

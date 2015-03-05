@@ -9,22 +9,22 @@
                 </div>
                 <div class="form-group">
                     <label>老師名稱：</label>
-                    <input type="text" name="name" class="form-control" value="{{{$student->name or ''}}}"/>
+                    <input type="text" name="name" class="form-control" value="{{{$teacher->name or ''}}}"/>
                 </div>
                 <div class="form-group">
                     <label>帳號：</label>
-                    <input type="text" name="account" class="form-control" value="{{{$student->account or ''}}}"/>
+                    <input type="text" name="account" class="form-control" value="{{{$teacher->account or ''}}}"/>
                 </div>
                 <div class="form-group">
                     <label>密碼：</label>
-                    <input type="password" name="password" class="form-control" value="{{{isset($student->password)?'oooooooo':''}}}"/>
+                    <input type="password" name="password" class="form-control" value="{{{isset($teacher->password)?'oooooooo':''}}}"/>
                 </div>
                 <div class="form-group">
                     <label>班級：</label>
                     <select class="form-control" name="classname">
                         <option value="0">無班級</option>
                     @foreach($classall as $classone)
-                        <option value="{{{$classone->id}}}" {{{$student->class_id or ''==$classone->id?'selected':''}}} >{{{$classone->name}}}</option>
+                        <option value="{{{$classone->id}}}" {{{$teacher->class_id or ''==$classone->id?'selected':''}}} >{{{$classone->name}}}</option>
                     @endforeach
                     </select>
                 </div>

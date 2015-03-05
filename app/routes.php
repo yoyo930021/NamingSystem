@@ -52,19 +52,10 @@ Route::get('/teacher', function()
 Route::post('/teacher', 'TeacherController@login');
 Route::get('/teacher/logout', 'TeacherController@logout');
 
-Route::get('/student', function()
-{
-    if (Session::get('studentlogin')==true)
-    {
-        return View::make('student.index');
-    }
-    else
-    {
-        return View::make('student.login');
-    }
-});
+
 Route::post('/student', 'StudentController@login');
 Route::get('/student/logout', 'StudentController@logout');
+Route::get('/student','StudentController@timetable');
 
 Route::get('/admin', function () {
     if (Auth::check())
@@ -98,8 +89,20 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('/admin.student.{action}.{id}', 'AdminController@studentwrite');
     Route::post('/admin.student.{action}', 'AdminController@studentwrite');
     Route::get('/admin.teacher','AdminController@teacherall');
+    Route::get('/admin.teacher.{action}.{id}', 'AdminController@teacheraction');
+    Route::get('/admin.teacher.add', 'AdminController@teacheradd');
+    Route::post('/admin.teacher.{action}.{id}', 'AdminController@teacherwrite');
     Route::post('/admin.teacher.{action}', 'AdminController@teacherwrite');
     Route::get('/admin.admin','AdminController@adminall');
+    Route::get('/admin.admin.add', 'AdminController@adminadd');
+    Route::get('/admin.admin.{action}.{id}', 'AdminController@adminaction');
+    Route::get('/admin.admin.add', 'AdminController@adminadd');
+    Route::post('/admin.admin.{action}.{id}', 'AdminController@adminwrite');
+    Route::post('/admin.admin.{action}', 'AdminController@adminwrite');
+    Route::get('/admin.log','AdminController@logall');
+    Route::get('/admin.log.clear','AdminController@logclear');
+    Route::get('/admin.setting','AdminController@setting');
+    Route::get('/admin.setting.{action}','AdminController@status');
 
     Route::get('/admin.logout', 'AdminController@logout');
 });

@@ -22,6 +22,7 @@
                 @if(Session::get('studentlogin')==true)
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
+                            <!--
                             <li><a href="#">人員管理</a>
                             </li>
                             <li><a href="#">課程管理</a>
@@ -31,6 +32,7 @@
                             <li>
                                 <a href="#">各樣申請</a>
                             </li>
+                            -->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a>{{{ Session::get('name') }}}</a>

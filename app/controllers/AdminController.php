@@ -390,45 +390,157 @@ class AdminController extends BaseController {
         $classall=ClassAll::all();
         return View::make('admin.teacherall')->with('teachers',$teacher)->with('classall',$classall);
     }
-    public function studentwrite($action,$id = null)
+    public function teacheradd()
+    {
+        $classall=ClassAll::all();
+        return View::make('admin.teacheradd')->with('classall',$classall);
+    }
+    public function teacheraction($action,$id)
+    {
+        switch ($action)
+        {
+            case 'modify':
+                $classall=ClassAll::all();
+                $teacher=Teacher::find($id);
+                return View::make('admin.teacheradd')->with('classall',$classall)->with('teacher',$teacher)->with('id',$id);
+                break;
+            case 'del':
+                Teacher::destroy($id);
+                return Redirect::to('/admin.teacher')->with('status','delect');
+                break;
+        }
+    }
+    public function teacherwrite($action,$id = null)
     {
         switch ($action)
         {
             case 'add':
                 $teacher=new Teacher;
                 $teacher->name=Input::get('name');
-                $teacher->seat=Input::get('number');
                 $teacher->account=Input::get('account');
                 $teacher->password=sha1(sha1(Input::get('password')) . "place");
                 $teacher->class_id=Input::get('classname');
                 $teacher->save();
-                return Redirect::to('/admin.student')->with('status','add');
+                return Redirect::to('/admin.teacher')->with('status','add');
                 break;
             case 'modify':
-                $student=Student::find(Input::get('id'));
-                $student->name=Input::get('name');
-                $student->seat=Input::get('number');
-                $student->account=Input::get('account');
+                $teacher=Teacher::find(Input::get('id'));
+                $teacher->name=Input::get('name');
+                $teacher->account=Input::get('account');
                 if(Input::get('password')!="oooooooo") {
-                    $student->password = sha1(sha1(Input::get('password')) . "place");
+                    $teacher->password = sha1(sha1(Input::get('password')) . "place");
                 }
-                $student->class_id=Input::get('classname');
-                $student->save();
-                return Redirect::to('/admin.student')->with('status','modify');
+                $teacher->class_id=Input::get('classname');
+                $teacher->save();
+                return Redirect::to('/admin.teacher')->with('status','modify');
                 break;
             case 'delall':
-                $choose=Input::get('students');
+                $choose=Input::get('teachers');
                 if(isset($choose))
                 {
                     for($i=0;$i<count($choose);$i++)
                     {
-                        Student::destroy($choose[$i]);
+                        Teacher::destroy($choose[$i]);
                     }
                 }
-                return Redirect::to('/admin.student')->with('status','delect');
+                return Redirect::to('/admin.teacher')->with('status','delect');
                 break;
         }
     }
+
+    public function adminall()
+    {
+        $admin=User::all();
+        return View::make('admin.adminall')->with('admins',$admin);
+    }
+    public function adminadd()
+    {
+        return View::make('admin.adminadd');
+    }
+    public function adminaction($action,$id)
+    {
+        switch ($action)
+        {
+            case 'modify':
+                $admin=User::find($id);
+                return View::make('admin.adminadd')->with('admin',$admin)->with('id',$id);
+                break;
+            case 'del':
+                User::destroy($id);
+                return Redirect::to('/admin.admin')->with('status','delect');
+                break;
+        }
+    }
+    public function adminwrite($action,$id = null)
+    {
+        switch ($action)
+        {
+            case 'add':
+                $admin=new User;
+                $admin->name=Input::get('name');
+                $admin->account=Input::get('account');
+                $admin->password=Hash::make(Input::get('password'));
+                $admin->save();
+                return Redirect::to('/admin.admin')->with('status','add');
+                break;
+            case 'modify':
+                $admin=User::find(Input::get('id'));
+                $admin->name=Input::get('name');
+                $admin->account=Input::get('account');
+                if(Input::get('password')!="oooooooo") {
+                    $admin->password = Hash::make(Input::get('password'));
+                }
+                $admin->save();
+                return Redirect::to('/admin.admin')->with('status','modify');
+                break;
+            case 'delall':
+                $choose=Input::get('admins');
+                if(isset($choose))
+                {
+                    for($i=0;$i<count($choose);$i++)
+                    {
+                        User::destroy($choose[$i]);
+                    }
+                }
+                return Redirect::to('/admin.admin')->with('status','delect');
+                break;
+        }
+    }
+    public function logall()
+    {
+        $log=Syslog::all();
+        return View::make('admin.logall')->with('logs',$log);
+    }
+    public function logclear()
+    {
+        DB::statement('TRUNCATE TABLE syslog');
+        return Redirect::to('/admin.log')->with('status','clear');
+    }
+    public function setting()
+    {
+        return View::make('admin.setting');
+    }
+    public function status($action)
+    {
+        switch($action)
+        {
+            case 'open':
+                $setting=Setting::find(0);
+                $setting->server_state=1;
+                $setting->admin_id=Auth::user()->id;
+                $setting->save();
+                return Redirect::to('/admin.setting')->with('status', 'open');
+                break;
+            case 'stop':
+                $setting=Setting::find(0);
+                $setting->server_state=0;
+                $setting->admin_id=Auth::user()->id;
+                $setting->save();
+                return Redirect::to('/admin.setting')->with('status', 'stop');
+                break;
+        }
+    }
+
 
 
     public function logout()

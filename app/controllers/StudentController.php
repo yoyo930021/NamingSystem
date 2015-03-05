@@ -52,6 +52,25 @@ class StudentController extends BaseController {
         }
     }
 
+    public function timetable()
+    {
+        if (Session::get('studentlogin')==true)
+        {
+            $week1=Timetable::where('section','=','1')->orderBy('week')->get();
+            $week2=Timetable::where('section','=','2')->orderBy('week')->get();
+            $week3=Timetable::where('section','=','3')->orderBy('week')->get();
+            $week4=Timetable::where('section','=','4')->orderBy('week')->get();
+            $week5=Timetable::where('section','=','5')->orderBy('week')->get();
+            $week6=Timetable::where('section','=','6')->orderBy('week')->get();
+            $week7=Timetable::where('section','=','7')->orderBy('week')->get();
+            return View::make('student.timetable')->with('week1',$week1)->with('week2',$week2)->with('week3',$week3)->with('week4',$week4)->with('week5',$week5)->with('week6',$week6)->with('week7',$week7);
+        }
+        else
+        {
+            return View::make('student.login');
+        }
+    }
+
     public function logout()
     {
         yslog(Session::get('account'),"student","logout","success");

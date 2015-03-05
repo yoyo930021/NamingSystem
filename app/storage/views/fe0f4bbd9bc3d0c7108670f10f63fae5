@@ -1,0 +1,43 @@
+<?php $__env->startSection('contain'); ?>
+
+        <div class="col-md-12">
+            <form method="post">
+                <div class="page-header">
+                    <h1>修改班級</h1>
+                </div>
+                <div class="form-group">
+                    <label>班級名稱：</label>
+                    <input type="text" name="classname" class="form-control" value="<?php echo e($classone->name); ?>"/>
+                </div>
+                <div class="form-group">
+                    <label>老師：</label>
+                    <select class="form-control" name="teacher">
+                    <?php foreach($teachers as $teacher): ?>
+                        <option value="<?php echo e($teacher->id); ?>" <?php echo e($classone->teacher_id==$teacher->id?'selected':''); ?> ><?php echo e($teacher->name); ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>學生：(請按Ctrl選擇)</label>
+                    <select class="form-control" multiple size="20" name="student[]">
+                        <?php foreach($students as $student): ?>
+                            <option value="<?php echo e($student->id); ?>"
+                                <?php foreach($classstudents as $classstudent): ?>
+                                    <?php if($classstudent->id==$student->id): ?>
+                                        selected
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                >
+                                <?php echo e($student->name); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <input type="hidden" value="<?php echo e(isset($id) ? $id : ''); ?>" name="id">
+                <input class="btn btn-primary btn-lg col-md-6" type="submit" value="送出" />
+                <input type="reset" class="btn btn-primary btn-lg col-md-6" value="回復原本" />
+            </form>
+        </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
